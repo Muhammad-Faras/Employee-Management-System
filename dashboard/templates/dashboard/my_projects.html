@@ -1,0 +1,75 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Leaves - Employee Management System{% endblock %}
+
+{% block content %}
+
+<h2 class="text-2xl font-semibold text-gray-700">Project Management</h2>
+
+    <!-- Project Summary Section -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-blue-100 p-4 rounded-lg shadow-md text-center">
+            <h3 class="text-lg font-medium text-blue-800">Total Projects</h3>
+            <p class="text-2xl font-semibold text-blue-800">{{ total_projects }}</p>
+        </div>
+        <div class="bg-green-100 p-4 rounded-lg shadow-md text-center">
+            <h3 class="text-lg font-medium text-green-800">In Progress Projects</h3>
+            <p class="text-2xl font-semibold text-green-800">{{ in_progress_projects }}</p>
+        </div>
+        <div class="bg-yellow-100 p-4 rounded-lg shadow-md text-center">
+            <h3 class="text-lg font-medium text-yellow-800">Completed Projects</h3>
+            <p class="text-2xl font-semibold text-yellow-800">{{ completed_projects }}</p>
+        </div>
+        <div class="bg-red-100 p-4 rounded-lg shadow-md text-center">
+            <h3 class="text-lg font-medium text-red-800">Overdue Projects</h3>
+            <p class="text-2xl font-semibold text-red-800">{{ overdue_projects }}</p>
+        </div>
+    </div>
+
+    <!-- Project List Table -->
+    <div>
+        <h3 class="text-xl font-medium text-gray-700 mb-4">Project List</h3>
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white border border-gray-200">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="py-3 px-2 text-left text-gray-600">ID</th>
+                        <th class="py-3 px-2 text-left text-gray-600">Project Title</th>
+                        <th class="py-3 px-2 text-left text-gray-600">Client Name</th>
+                        <th class="py-3 px-2 text-left text-gray-600">Start Date</th>
+                        <th class="py-3 px-2 text-left text-gray-600">End Date</th>
+                        <th class="py-3 px-2 text-left text-gray-600">DeadLine</th>
+                        <th class="py-3 px-2 text-left text-gray-600">Members</th>
+                        <th class="py-3 px-2 text-left text-gray-600">Priority</th>
+                        
+                        <th class="py-3 px-2 text-left text-gray-600">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Example row -->
+                    {% for project in projects_list %}
+                    <tr class="hover:bg-gray-100">
+                        <td class="py-3 px-4 border-b border-gray-200">{{ project.id }}</td>
+                        <td class="py-3 px-4 border-b border-gray-200">{{ project.title }}</td>
+                        <td class="py-3 px-4 border-b border-gray-200">{{ project.client_name }}</td>
+                        <td class="py-3 px-4 border-b border-gray-200">{{ project.start_date }}</td>
+                        <td class="py-3 px-4 border-b border-gray-200">{{ project.end_date }}</td>
+                        <td class="py-3 px-4 border-b border-gray-200">{{ project.deadline }}</td>
+                        <td class="py-3 px-4 border-b border-gray-200">
+                            {% for member in project.members.all %}
+                            {{ member.id }}/
+                        {% endfor %}
+                        
+                        </td>
+                        <td class="py-3 px-4 border-b border-gray-200">{{ project.priority }}</td>
+                        <td class="py-3 px-4 border-b border-gray-200 text-green-600">{{ project.status }}</td>
+                        
+                    </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Notifications - Employee Management System{% endblock %}
+
+{% block content %}
+<div class="bg-white p-6 rounded-lg shadow-lg">
+    <h2 class="text-3xl font-semibold text-gray-800 mb-6">Notifications</h2>
+
+    <!-- Notifications Section -->
+    <div class="space-y-6">
+        <!-- Notification Item -->
+        <div class="flex items-center space-x-4 py-4 px-6 bg-gray-100 rounded-lg">
+            <div class="p-3 bg-blue-500 rounded-full text-white">
+                <i class="fas fa-bell"></i>
+            </div>
+            <div>
+                <p class="text-lg font-semibold text-gray-800">Attendance Reminder</p>
+                <p class="text-gray-600">Please remember to check-in for today's attendance.</p>
+                <p class="text-sm text-gray-500">2 hours ago</p>
+            </div>
+        </div>
+
+        <!-- Notification Item -->
+        <div class="flex items-center space-x-4 py-4 px-6 bg-gray-100 rounded-lg">
+            <div class="p-3 bg-green-500 rounded-full text-white">
+                <i class="fas fa-check"></i>
+            </div>
+            <div>
+                <p class="text-lg font-semibold text-gray-800">Leave Approved</p>
+                <p class="text-gray-600">Your leave request for July 5th has been approved.</p>
+                <p class="text-sm text-gray-500">Yesterday</p>
+            </div>
+        </div>
+
+        <!-- Notification Item -->
+        <div class="flex items-center space-x-4 py-4 px-6 bg-gray-100 rounded-lg">
+            <div class="p-3 bg-red-500 rounded-full text-white">
+                <i class="fas fa-exclamation"></i>
+            </div>
+            <div>
+                <p class="text-lg font-semibold text-gray-800">Task Update</p>
+                <p class="text-gray-600">Task "Update Employee Handbook" is overdue.</p>
+                <p class="text-sm text-gray-500">3 days ago</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

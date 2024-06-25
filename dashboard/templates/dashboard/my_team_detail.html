@@ -1,0 +1,45 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Team Detail - Employee Management System{% endblock %}
+
+{% block content %}
+<div class="bg-white p-6 rounded-lg shadow-lg space-y-6">
+    <h2 class="text-2xl font-semibold text-gray-700">Team: {{ team.name }}</h2>
+    <h3 class="text-xl font-medium text-gray-700 mb-4">Project: {{ team.project.title }}</h3>
+    
+    <div>
+        <h4 class="text-lg font-medium text-gray-700 mb-2">Description</h4>
+        <p class="text-gray-600">{{ team.description }}</p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-blue-100 p-4 rounded-lg shadow-md">
+            <h4 class="text-lg font-medium text-blue-800">Project Start Date</h4>
+            <p class="text-blue-800">{{ team.project.start_date }}</p>
+        </div>
+        <div class="bg-green-100 p-4 rounded-lg shadow-md">
+            <h4 class="text-lg font-medium text-green-800">Project End Date</h4>
+            <p class="text-green-800">{{ team.project.end_date }}</p>
+        </div>
+        <div class="bg-yellow-100 p-4 rounded-lg shadow-md">
+            <h4 class="text-lg font-medium text-yellow-800">Project Status</h4>
+            <p class="text-yellow-800">{{ team.project.status }}</p>
+        </div>
+    </div>
+    
+    <div>
+        <h4 class="text-lg font-medium text-gray-700 mb-2">Team Members</h4>
+        <ul class="list-disc pl-5">
+            {% for project, members in project_members.items %}
+                <ul class="list-disc pl-5">
+                    {% for member in members %}
+                        <li class="text-gray-600">{{ member.username }} - {{ member.email }}</li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        </ul>
+        
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,86 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Leaves - Employee Management System{% endblock %}
+
+{% block content %}
+
+
+<h2 class="text-2xl font-semibold text-gray-700">My Teams</h2>
+
+    {% comment %} <!-- Team Summary Section -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-green-100 p-4 rounded-lg shadow-md text-center">
+            <h3 class="text-lg font-medium text-green-800">Total Team Members</h3>
+            <p class="text-2xl font-semibold text-green-800">8</p>
+        </div>
+        <div class="bg-blue-100 p-4 rounded-lg shadow-md text-center">
+            <h3 class="text-lg font-medium text-blue-800">Available Members</h3>
+            <p class="text-2xl font-semibold text-blue-800">6</p>
+        </div>
+        <div class="bg-red-100 p-4 rounded-lg shadow-md text-center">
+            <h3 class="text-lg font-medium text-red-800">Members Absent</h3>
+            <p class="text-2xl font-semibold text-red-800">2</p>
+        </div>
+    </div> {% endcomment %}
+
+    <!-- Team Members Table -->
+    <div>
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white border border-gray-200">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="py-3 px-4 text-left text-gray-600">Team</th>
+                        <th class="py-3 px-4 text-left text-gray-600">Project Title</th>
+                        <th class="py-3 px-4 text-left text-gray-600">Description</th>
+                        <th class="py-3 px-4 text-left text-gray-600">End Date</th>
+                        <th class="py-3 px-4 text-left text-gray-600">DeadLine</th>
+                        <th class="py-3 px-4 text-left text-gray-600">Priority</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Example row -->
+                    {% for team in team_list %}
+<tr class="hover:bg-gray-100">
+    <td class="py-3 px-4 border-b border-gray-200">
+        <a href="{% url 'dashboard:team_detail' team.id %}" class="text-blue-600 hover:underline">{{ team.name }}</a>
+    </td>
+    <td class="py-3 px-4 border-b border-gray-200">
+        <a href="{% url 'dashboard:team_detail' team.id %}" class="text-blue-600 hover:underline">{{ team.project.title }}</a>
+    </td>
+    <td class="py-3 px-4 border-b border-gray-200">
+        <a href="{% url 'dashboard:team_detail' team.id %}" class="text-blue-600 hover:underline">{{ team.description }}</a>
+    </td>
+    <td class="py-3 px-4 border-b border-gray-200">
+        <a href="{% url 'dashboard:team_detail' team.id %}" class="text-blue-600 hover:underline">{{ team.project.start_date }}</a>
+    </td>
+    <td class="py-3 px-4 border-b border-gray-200">
+        <a href="{% url 'dashboard:team_detail' team.id %}" class="text-blue-600 hover:underline">{{ team.project.end_date }}</a>
+    </td>
+    <td class="py-3 px-4 border-b border-gray-200 text-green-600">
+        <a href="{% url 'dashboard:team_detail' team.id %}" class="text-blue-600 hover:underline">{{ team.project.status }}</a>
+    </td>
+</tr>
+{% endfor %}
+
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('tr[data-href]').forEach(row => {
+            row.addEventListener('click', function() {
+                window.location.href = this.dataset.href;
+            });
+        });
+    });
+</script>
+
+{% endblock %}

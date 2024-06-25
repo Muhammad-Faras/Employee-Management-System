@@ -1,0 +1,57 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Profile - Employee Management System{% endblock %}
+
+{% block content %}
+<div class="bg-white p-6 rounded-lg shadow-lg">
+    <h2 class="text-3xl font-semibold text-gray-800 mb-6">My Profile</h2>
+
+    <!-- Profile Information Section -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <!-- Left Column: Profile Picture and Basic Info -->
+        <div class="flex items-center space-x-8">
+            {% if profile %}
+            {% if profile.profile_image %}
+            <img src="{{ profile.profile_image.url }}" alt="Profile" class="rounded-full w-36 h-36 shadow-lg">
+            {% endif %}
+            <div>
+                
+                <p class="text-2xl font-semibold text-gray-800">{{ profile.user.username }}</p>
+                
+                <p class="text-lg text-gray-600">Employee</p>
+                <p class="text-lg text-gray-600">Department: {{ profile.department }}</p>
+                <p class="text-lg text-gray-600">Email: {{ profile.user.email }}</p>
+                <p class="text-lg text-gray-600">Phone: {{ profile.phone }}</p>
+            </div>
+        </div>
+
+        <!-- Right Column: Additional Information -->
+        <div>
+            <div class="border-t border-gray-300 mt-6 pt-6">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4">Additional Information</h3>
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <p class="text-lg text-gray-600"><span class="font-semibold">Role:</span> {{ profile.role.role_name }}</p>
+                        <p class="text-lg text-gray-600"><span class="font-semibold">Manager:</span> {{ profile.manager }}</p>
+                        <p class="text-lg text-gray-600"><span class="font-semibold">Joined:</span> {{ profile.joined_date }}</p>
+                    </div>
+                    <div>
+                        <p class="text-lg text-gray-600"><span class="font-semibold">Location:</span> {{ profile.location }}</p>
+                        <p class="text-lg text-gray-600"><span class="font-semibold">Status:</span>
+                            {% if profile.user.is_active %}
+                                Active
+                            {% else %}
+                                InActive
+                            {% endif %}
+                        </p>
+                        <p class="text-lg text-gray-600"><span class="font-semibold">Birthday:</span> {{ profile.birthday }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <p>profile not created yet</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}My Tasks - Employee Management System{% endblock %}
+
+{% block content %}
+<div class="bg-white p-6 rounded-lg shadow-lg space-y-6">
+    <h2 class="text-2xl font-semibold text-gray-700">My Tasks</h2>
+
+    <!-- Task List Section -->
+    <div>
+        <h3 class="text-xl font-medium text-gray-700 mb-4">Task List</h3>
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white border border-gray-200">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="py-3 px-4 text-left text-gray-600">Task No</th>
+                        <th class="py-3 px-4 text-left text-gray-600">Project</th>
+                        <th class="py-3 px-4 text-left text-gray-600">Client</th>
+                        <th class="py-3 px-4 text-left text-gray-600">Status</th>
+                        <th class="py-3 px-4 text-left text-gray-600">Type</th>
+                        <th class="py-3 px-4 text-left text-gray-600">Priority</th>
+                        <th class="py-3 px-4 text-left text-gray-600">Executor</th>
+                        <th class="py-3 px-4 text-left text-gray-600">Joining Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in task_list %}
+                    <tr class="hover:bg-gray-100">
+                        <td class="py-3 px-4 border-b border-gray-200">{{ task.task_no }}</td>
+                        <td class="py-3 px-4 border-b border-gray-200">{{ task.project.title }}</td>
+                        <td class="py-3 px-4 border-b border-gray-200">{{ task.project.client_name }}</td>
+                        <td class="py-3 px-4 border-b border-gray-200">
+                            <span class="rounded-full px-3 py-1 text-xs font-semibold" style="background-color: {% if task.status == 'Completed' %}green{% elif task.status == 'In Progress' %}yellow{% elif task.status == 'Not Started' %}gray{% elif task.status == 'On Hold' %}orange{% elif task.status == 'Cancelled' %}red{% endif %}; color: white;">
+                                {{ task.get_status_display }}
+                            </span>
+                        </td>
+                        <td class="py-3 px-4 border-b border-gray-200">{{ task.get_task_type_display }}</td>
+                        <td class="py-3 px-4 border-b border-gray-200">{{ task.get_priority_display }}</td>
+                        <td class="py-3 px-4 border-b border-gray-200">{{ task.executor.username }}</td>
+                        <td class="py-3 px-4 border-b border-gray-200">{{ task.joining_date }}</td>
+                    
+                        
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="10" class="text-center py-4">No tasks found.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    </div>
+{% endblock %}

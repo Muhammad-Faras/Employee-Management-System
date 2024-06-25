@@ -1,0 +1,64 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Leaves - Employee Management System{% endblock %}
+
+{% block content %}
+<div class="bg-white p-6 rounded-lg shadow-lg space-y-6">
+    <h2 class="text-2xl font-semibold text-gray-700">Leave Management</h2>
+
+    <!-- Leave Summary Section -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-red-100 p-4 rounded-lg shadow-md text-center">
+            <h3 class="text-lg font-medium text-red-800">Leave Requests</h3>
+            <p class="text-2xl font-semibold text-red-800">{{ leaves_requests }}</p>
+        </div>
+        <div class="bg-blue-100 p-4 rounded-lg shadow-md text-center">
+            <h3 class="text-lg font-medium text-blue-800">Total Leaves Approved</h3>
+            <p class="text-2xl font-semibold text-blue-800">{{ total_leaves_approved }}</p>
+        </div>
+        <div class="bg-green-100 p-4 rounded-lg shadow-md text-center">
+            <h3 class="text-lg font-medium text-green-800">Total Leaves Pending</h3>
+            <p class="text-2xl font-semibold text-green-800">{{ total_leaves_pending }}</p>
+        </div>
+        
+        <div class="bg-red-100 p-4 rounded-lg shadow-md text-center">
+            <h3 class="text-lg font-medium text-red-800">Total Leaves Rejected</h3>
+            <p class="text-2xl font-semibold text-red-800">{{ total_leaves_rejected }}</p>
+        </div>
+    </div>
+
+    <!-- Leave Request Table -->
+    <div>
+        <h3 class="text-xl font-medium text-gray-700 mb-4">Leave Requests</h3>
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white border border-gray-200">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="py-3 px-4 text-left text-gray-600">Apply Date</th>
+                        <th class="py-3 px-4 text-left text-gray-600">From Date</th>
+                        <th class="py-3 px-4 text-left text-gray-600">To Date</th>
+                        <th class="py-3 px-4 text-left text-gray-600">Type </th>
+                        <th class="py-3 px-4 text-left text-gray-600">Reason</th>
+                        <th class="py-3 px-4 text-left text-gray-600">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Example row -->
+                    {% for leave in leaves_list %}
+                    <tr class="hover:bg-gray-100">
+                        <td class="py-3 px-4 border-b border-gray-200">{{ leave.apply_date }}</td>
+                        <td class="py-3 px-4 border-b border-gray-200">{{ leave.start_date }}</td>
+                        <td class="py-3 px-4 border-b border-gray-200">{{ leave.end_date }}</td>
+                        <td class="py-3 px-4 border-b border-gray-200">{{ leave.leave_type }}</td>
+                        <td class="py-3 px-4 border-b border-gray-200">{{ leave.reason }}</td>
+                        <td class="py-3 px-4 border-b border-gray-200 text-yellow-600 ">{{ leave.status }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    
+</div>
+{% endblock %}
